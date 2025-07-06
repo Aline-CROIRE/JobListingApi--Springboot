@@ -70,23 +70,25 @@ mvn clean install
 
 # Run the application
 java -jar target/joblistingapi-0.0.1-SNAPSHOT.jar
-Use code with caution.
-Bash
+
 The application will start on http://localhost:8080 and will automatically connect to the MongoDB container.
 API Endpoints
 The base URL for all API endpoints is http://localhost:8080.
+
 Authentication (/api/auth)
 Method	Endpoint	Description	Access Control
 POST	/api/auth/register	Register a new user.	Public
 POST	/api/auth/login	Log in to get a JWT.	Public
 Jobs (/api/jobs)
+
 Method	Endpoint	Description	Access Control
 GET	/api/jobs	Get a list of all jobs.	Public
 GET	/api/jobs/{jobId}	Get details of a single job.	Public
 POST	/api/jobs	Post a new job listing.	Employer Only
 POST	/api/jobs/{jobId}/apply	Apply for a specific job.	Applicant Only
 GET	/api/jobs/{jobId}/applicants	View all applicants for a job.	Employer Only
-🧪 API Testing Guide (Postman)
+
+#🧪 API Testing Guide (Postman)
 This guide provides a full workflow for testing the API's functionality.
 Setup in Postman
 Create a new Collection named Job Listing API.
@@ -130,7 +132,9 @@ You will get a 200 OK response with the updated job object.
 Employer Views Applicants (GET /api/jobs/{{JOB_ID}}/applicants)
 Authorization: Type Bearer Token, Token {{EMPLOYER_TOKEN}}.
 You will get a 200 OK response with an array containing the janesmith user object.
-🏛️ Project Structure
+
+
+#🏛️ Project Structure
 The project follows a standard layered architecture to ensure separation of concerns.
 src/main/java/com/joblisting/joblistingapi
 model: Contains the data models (User, Job, Role). These are mapped to MongoDB documents.
@@ -140,13 +144,16 @@ controller: Contains the REST API controllers that handle incoming HTTP requests
 security: Contains all Spring Security and JWT-related configurations (SecurityConfig, JwtUtil, etc.).
 src/main/resources:
 application.properties: Main configuration file for the application, including the database connection URI.
-🔮 Future Improvements
+
+
+#🔮 Future Improvements
 Implement Update and Delete endpoints for jobs.
 Add more robust validation for request bodies.
 Implement a search and filtering API for jobs (e.g., by title, location).
 Add pagination to the GET /api/jobs endpoint.
 Write unit and integration tests for all layers.
 Externalize sensitive configurations (like the JWT secret) using environment variables or a configuration server.
-📄 License
+
+#📄 License
 This project is licensed under the MIT License. See the LICENSE file for details.
 
