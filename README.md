@@ -1,14 +1,4 @@
 
-ThinkingThoughts
-(experimental)
-Auto
-Expand to view model thoughts
-
-chevron_right
-Of course. A great README.md file is the most important piece of documentation for any project. It should be professional, clear, and make it easy for anyone (including your future self) to understand, run, and use your API.
-Here is a comprehensive and polished README.md file designed specifically for the project we've built.
-Create a file named README.md in the root directory of your project and paste the following content into it.
-Generated markdown
 # Job Listing REST API
 
 ![Java](https://img.shields.io/badge/Java-17-blue)
@@ -59,19 +49,20 @@ Follow these steps to get the application running on your local machine.
 ### 1. Clone the Repository
 
 ```bash
-git clone <your-repository-url>
-cd joblistingapi
-Use code with caution.
-Markdown
-2. Start the MongoDB Database
+git clone
+cd joblistingapi--Springboot
+``
+
+# 2. Start the MongoDB Database
 This project requires a running MongoDB instance. The easiest way to start one is with Docker.
 Important: Make sure Docker Desktop is running before executing the command.
-Generated bash
+
 # This command downloads the Mongo image (if not present) and starts a container named "job-api-mongo"
 docker run -d -p 27017:27017 --name job-api-mongo mongo
 Use code with caution.
 Bash
 To verify that the container is running, use the command docker ps. You should see job-api-mongo in the list with a status of "Up".
+
 3. Build and Run the Application
 Use Maven to build the project and then run the executable JAR file.
 Generated bash
@@ -109,35 +100,30 @@ Register Employer (POST /api/auth/register)
 Body (raw, JSON):
 Generated json
 { "username": "supercorp", "password": "password123", "role": "EMPLOYER" }
-Use code with caution.
-Json
+
 Register Applicant (POST /api/auth/register)
 Body (raw, JSON):
-Generated json
+
 { "username": "janesmith", "password": "password456", "role": "APPLICANT" }
-Use code with caution.
-Json
+
 Login as Employer (POST /api/auth/login)
 Body (raw, JSON):
-Generated json
+
 { "username": "supercorp", "password": "password123" }
-Use code with caution.
-Json
+
 Action: Copy the entire token string from the response and save it to the EMPLOYER_TOKEN collection variable.
 Employer Posts a Job (POST /api/jobs)
 Authorization: Type Bearer Token, Token {{EMPLOYER_TOKEN}}.
 Body (raw, JSON):
-Generated json
+
 { "title": "Principal Cloud Architect", "description": "Expert in AWS and K8s.", "location": "Remote" }
-Use code with caution.
-Json
+
 Action: Copy the "id" from the response and save it to the JOB_ID collection variable.
 Login as Applicant (POST /api/auth/login)
 Body (raw, JSON):
 Generated json
 { "username": "janesmith", "password": "password456" }
-Use code with caution.
-Json
+
 Action: Copy the token and save it to the APPLICANT_TOKEN variable.
 Applicant Applies for Job (POST /api/jobs/{{JOB_ID}}/apply)
 Authorization: Type Bearer Token, Token {{APPLICANT_TOKEN}}.
@@ -164,4 +150,4 @@ Write unit and integration tests for all layers.
 Externalize sensitive configurations (like the JWT secret) using environment variables or a configuration server.
 📄 License
 This project is licensed under the MIT License. See the LICENSE file for details.
-Generated code
+
