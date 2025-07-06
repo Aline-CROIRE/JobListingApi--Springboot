@@ -48,10 +48,9 @@ Follow these steps to get the application running on your local machine.
 
 ### 1. Clone the Repository
 
-```bash
 git clone
 cd joblistingapi--Springboot
-``
+
 
 # 2. Start the MongoDB Database
 This project requires a running MongoDB instance. The easiest way to start one is with Docker.
