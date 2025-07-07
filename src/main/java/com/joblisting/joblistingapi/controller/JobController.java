@@ -65,6 +65,57 @@ public class JobController {
         return ResponseEntity.status(HttpStatus.CREATED).body(response);
     }
 
+    @PutMapping("/{id}")
+    public ResponseEntity<?> updateJob(@PathVariable String id, @RequestBody Job updatedJob) {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        String employerUsername = authentication.getName();
+
+        Map<String, Object> response = new HashMap<>();
+        try {
+            Job job = jobService.updateJob(id, updatedJob, employerUsername);
+            response.put("success", true);
+            response.put("message", "Job updated successfully");
+            response.put("job", job);
+            response.put("timestamp", LocalDateTime.now());
+            return ResponseEntity.ok(response);
+        } catch (SecurityException e) {
+            response.put("success", false);
+            response.put("message", "Access denied: " + e.getMessage());
+            response.put("timestamp", LocalDateTime.now());
+            return ResponseEntity.status(HttpStatus.FORBIDDEN).body(response);
+        } catch (RuntimeException e) {
+            response.put("success", false);
+            response.put("message", "Error updating job: " + e.getMessage());
+            response.put("timestamp", LocalDateTime.now());
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(response);
+        }
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<?> deleteJob(@PathVariable String id) {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        String employerUsername = authentication.getName();
+
+        Map<String, Object> response = new HashMap<>();
+        try {
+            jobService.deleteJob(id, employerUsername);
+            response.put("success", true);
+            response.put("message", "Job deleted successfully");
+            response.put("timestamp", LocalDateTime.now());
+            return ResponseEntity.ok(response);
+        } catch (SecurityException e) {
+            response.put("success", false);
+            response.put("message", "Access denied: " + e.getMessage());
+            response.put("timestamp", LocalDateTime.now());
+            return ResponseEntity.status(HttpStatus.FORBIDDEN).body(response);
+        } catch (RuntimeException e) {
+            response.put("success", false);
+            response.put("message", "Error deleting job: " + e.getMessage());
+            response.put("timestamp", LocalDateTime.now());
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(response);
+        }
+    }
+
     @PostMapping("/{jobId}/apply")
     public ResponseEntity<?> applyForJob(@PathVariable String jobId) {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
