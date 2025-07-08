@@ -88,50 +88,6 @@ POST	/api/jobs	Post a new job listing.	Employer Only
 POST	/api/jobs/{jobId}/apply	Apply for a specific job.	Applicant Only
 GET	/api/jobs/{jobId}/applicants	View all applicants for a job.	Employer Only
 
-# 🧪 API Testing Guide (Postman)
-This guide provides a full workflow for testing the API's functionality.
-Setup in Postman
-Create a new Collection named Job Listing API.
-In the Collection's Variables tab, create these variables (leave values blank):
-EMPLOYER_TOKEN
-APPLICANT_TOKEN
-JOB_ID
-Full Workflow
-Register Employer (POST /api/auth/register)
-Body (raw, JSON):
-Generated json
-{ "username": "supercorp", "password": "password123", "role": "EMPLOYER" }
-
-Register Applicant (POST /api/auth/register)
-Body (raw, JSON):
-
-{ "username": "janesmith", "password": "password456", "role": "APPLICANT" }
-
-Login as Employer (POST /api/auth/login)
-Body (raw, JSON):
-
-{ "username": "supercorp", "password": "password123" }
-
-Action: Copy the entire token string from the response and save it to the EMPLOYER_TOKEN collection variable.
-Employer Posts a Job (POST /api/jobs)
-Authorization: Type Bearer Token, Token {{EMPLOYER_TOKEN}}.
-Body (raw, JSON):
-
-{ "title": "Principal Cloud Architect", "description": "Expert in AWS and K8s.", "location": "Remote" }
-
-Action: Copy the "id" from the response and save it to the JOB_ID collection variable.
-Login as Applicant (POST /api/auth/login)
-Body (raw, JSON):
-Generated json
-{ "username": "janesmith", "password": "password456" }
-
-Action: Copy the token and save it to the APPLICANT_TOKEN variable.
-Applicant Applies for Job (POST /api/jobs/{{JOB_ID}}/apply)
-Authorization: Type Bearer Token, Token {{APPLICANT_TOKEN}}.
-You will get a 200 OK response with the updated job object.
-Employer Views Applicants (GET /api/jobs/{{JOB_ID}}/applicants)
-Authorization: Type Bearer Token, Token {{EMPLOYER_TOKEN}}.
-You will get a 200 OK response with an array containing the janesmith user object.
 
 
 # 🏛️ Project Structure
